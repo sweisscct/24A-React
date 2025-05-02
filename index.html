@@ -15,9 +15,69 @@
 }
 </script>
 <script type="text/babel" data-type="module">
-    import React, { StrictMode } from 'react';
-    import { createRoot } from 'react-dom/client';
+  import React, { StrictMode } from 'react';
+  import { createRoot } from 'react-dom/client';
 
-    import { useState } from 'react';
+  import { useState } from 'react';
+
+  function App() {
+    // [variable, functionToChangeVariable] = useState(initial value of variable)
+    const [count, changeCount] = useState(0);
+
+    function buttonClick() {
+      changeCount(count + 1)
+    }
+
+    function decrementCount() {
+      changeCount(count - 1);
+    }
+
+    function resetCount() {
+      changeCount(0);
+    }
+    /*
+    let count = 0;
+    button.addEventListener("click", () => {
+      count++;
+      button.innerText = `This has been clicked ${count} times`;
+    })
+    */
+    const paragraphs = [];
+    for (let i=0; i<20; i++) {
+      paragraphs.push(<Paragrapgh key={i} paragraphNum={i}/>)
+    }
+
+
+    return(
+      <div>
+        <h1>Welecome to the website!</h1>
+        <p>I hope you like it</p>
+        <CountButton parameter={"value"} count={count} buttonClick={resetCount} />
+        <Paragrapgh paragraphNum={"a"}/>
+        <Paragrapgh paragraphNum={"b"}/>
+        <Paragrapgh paragraphNum={28}/>
+        <Paragrapgh paragraphNum={count}/>
+        <CountButton parameter={"value"} count={count} buttonClick={buttonClick} />
+        {paragraphs}
+      </div>
+    )
+  }
+
+  function Paragrapgh({paragraphNum}) {
+    return(
+      <p>This is a paragraph! This is paragraph number: {paragraphNum}</p>
+    )
+  }
+
+  function CountButton( {count, buttonClick} ) {
+    return(
+      <button onClick={buttonClick}>This has been clicked {count} times</button>
+    )
+  }
+
+  const root = createRoot(document.getElementById("root"));
+  root.render(
+    <App/>
+  );
 </script>
 </html>
