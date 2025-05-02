@@ -21,6 +21,18 @@
   import { useState } from 'react';
 
   function App() {
+    /*
+      Exercise:
+        Create an Image component
+        This will display an image
+        Create a ChangeImage button
+        Everytime this button is clicked, it will display the next image
+        The images will cycle through 3 predetermined images
+
+
+    */
+
+
     // [variable, functionToChangeVariable] = useState(initial value of variable)
     const [count, changeCount] = useState(0);
 
@@ -47,6 +59,21 @@
       paragraphs.push(<Paragrapgh key={i} paragraphNum={i}/>)
     }
 
+    const MusicDataArray = [
+      {
+        song: "We Are The Champions",
+        artist: "Queen",
+        rating: 5
+      },
+      { song: "Never Gonna Give You Up", artist: "Risk Astley", rating: 5 },
+      { song: "Coffee and TV", artist: "Blur", rating: 4 },
+      { song: "Sharks", artist: "Imagine Dragons", rating: 4 }
+    ];
+
+    const MusicComponents = [];
+    MusicDataArray.forEach(Music => {
+      MusicComponents.push(<MusicData Music={Music} />)
+    })
 
     return(
       <div>
@@ -58,6 +85,7 @@
         <Paragrapgh paragraphNum={28}/>
         <Paragrapgh paragraphNum={count}/>
         <CountButton parameter={"value"} count={count} buttonClick={buttonClick} />
+        {MusicComponents}
         {paragraphs}
       </div>
     )
@@ -72,6 +100,17 @@
   function CountButton( {count, buttonClick} ) {
     return(
       <button onClick={buttonClick}>This has been clicked {count} times</button>
+    )
+  }
+
+
+  function MusicData( {Music} ) {
+    return(
+      <ul>
+        <li>Song: {Music.song}</li>
+        <li>Artist: {Music.artist}</li>
+        <li>Rating: {Music.rating}/5</li>
+      </ul>
     )
   }
 
