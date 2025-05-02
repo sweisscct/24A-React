@@ -35,6 +35,7 @@
 
     // [variable, functionToChangeVariable] = useState(initial value of variable)
     const [count, changeCount] = useState(0);
+    const [imageIndex, changeImageIndex] = useState(0);
 
     function buttonClick() {
       changeCount(count + 1)
@@ -46,6 +47,10 @@
 
     function resetCount() {
       changeCount(0);
+    }
+
+    function changeImage() {
+      changeImageIndex( (imageIndex+1)%imageDataArray.length );
     }
     /*
     let count = 0;
@@ -75,6 +80,12 @@
       MusicComponents.push(<MusicData Music={Music} />)
     })
 
+    const imageDataArray = [
+      { src: "img1.png", alt: "img1" },
+      { src: "img2.png", alt: "img2" },
+      { src: "img3.png", alt: "img3" }
+    ]
+
     return(
       <div>
         <h1>Welecome to the website!</h1>
@@ -84,6 +95,8 @@
         <Paragrapgh paragraphNum={"b"}/>
         <Paragrapgh paragraphNum={28}/>
         <Paragrapgh paragraphNum={count}/>
+        <Image ImageData={imageDataArray[imageIndex]} />
+        <ChangeImageButton changeImage={changeImage}/>
         <CountButton parameter={"value"} count={count} buttonClick={buttonClick} />
         {MusicComponents}
         {paragraphs}
@@ -111,6 +124,18 @@
         <li>Artist: {Music.artist}</li>
         <li>Rating: {Music.rating}/5</li>
       </ul>
+    )
+  }
+
+  function Image( {ImageData} ) {
+    return(
+      <img src={ImageData.src} alt={ImageData.alt} />
+    )
+  }
+
+  function ChangeImageButton({changeImage}) {
+    return(
+      <button onClick={changeImage}>Change Image</button>
     )
   }
 
